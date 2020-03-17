@@ -1,6 +1,9 @@
 import React from 'react';
 import * as url from 'utils/url';
 import APIutil from 'utils/APIutils';
+import 'assets/contacts.css';
+import NumberFormat from 'react-number-format';
+
 
 
 
@@ -25,10 +28,13 @@ export default class Contacts extends React.Component{
               throw error;
           });
     }
-    
+
     calculateTotalValue(data){
         var arrayOfNumbers = data.map(Number);
-       return arrayOfNumbers.reduce((a, b) => a + b, 0)
+     //var data=  <NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+      // return arrayOfNumbers.reduce((a, b) => a + b, 0);
+       return<NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+   
     }
 
     render(){
@@ -38,9 +44,12 @@ export default class Contacts extends React.Component{
 if(contacts!==null){
 
     content = contacts.map((element,index)=>{
-        return  <tr><td>{index+1}</td>
+        return  <tr key={index}>
+                <td><input type="checkbox" id={index}/></td>
                 <td>{element.firstName + element.lastName}</td>
                 <td>{this.calculateTotalValue(element.scoreValues)}</td>
+                <td>{element.phone}</td>
+                <td>{element.phone}</td>
                 <td>{element.phone}</td>
         </tr>
       });
@@ -48,11 +57,11 @@ if(contacts!==null){
 
 }
         return(
-            <div>
-                <h2>contacts List</h2>
-                <table>
-                    <tr><th>S.No</th><th>Contact Name</th><th>Total Value</th><th>Location deals</th><th>Tags</th></tr>
-                    {content}
+            <div className="container">
+                <h2>Contacts</h2>
+                <table className="table">
+                <thead><tr><th><input type="checkbox"/></th><th>Contact Name</th><th>Total Value</th><th>Location</th><th>Deals</th><th>Tags</th></tr></thead>
+                  <tbody>{content}</tbody> 
                 </table>
             </div>
         )

@@ -1,0 +1,41 @@
+
+.container{
+    width: 90%;
+    margin-left: 5%;
+}
+
+.table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  
+  .table td, .table th {
+    border: 1px solid #e6e9f1;
+    padding: 8px;
+    height: 46px;
+    text-align: left;
+    color:#52535a;
+  }
+  
+  .table tr:nth-child(even){background-color: #fafbff;}
+  
+  /* .table tr:hover {background-color: #ddd;} */
+  
+  .table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    height: 28px;
+    color:#72788d;
+  }
+
+
+
+
+
+  .name-image-initials-container{
+      height: 30px;
+      background-color: red;
+      border-radius: 50%;
+  }
