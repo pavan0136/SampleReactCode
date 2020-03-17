@@ -36,6 +36,9 @@
 
   .name-image-initials-container{
       height: 30px;
-      background-color: red;
+      width: 30px;
+      background-color: #eae0fe;
       border-radius: 50%;
+      float: left;
+       /*text-align: center; */
   }

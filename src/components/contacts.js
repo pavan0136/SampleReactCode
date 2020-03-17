@@ -1,10 +1,9 @@
 import React from 'react';
-import * as url from 'utils/url';
-import APIutil from 'utils/APIutils';
-import 'assets/contacts.css';
 import NumberFormat from 'react-number-format';
-
-
+import * as url from '../utils/url';
+import APIutil from '../utils/APIutils';
+import '../assets/contacts.css';
+import Name from './name'
 
 
 export default class Contacts extends React.Component{
@@ -31,10 +30,11 @@ export default class Contacts extends React.Component{
 
     calculateTotalValue(data){
         var arrayOfNumbers = data.map(Number);
-     //var data=  <NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-      // return arrayOfNumbers.reduce((a, b) => a + b, 0);
-       return<NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
-   
+       return <NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+    }
+
+    getInitials(firstName,LastName){
+        return
     }
 
     render(){
@@ -46,7 +46,7 @@ if(contacts!==null){
     content = contacts.map((element,index)=>{
         return  <tr key={index}>
                 <td><input type="checkbox" id={index}/></td>
-                <td>{element.firstName + element.lastName}</td>
+                <td> <Name firstName={element.firstName} lastName={element.lastName} initials={this.getInitials(element.firstName,element.lastName)}/> </td>
                 <td>{this.calculateTotalValue(element.scoreValues)}</td>
                 <td>{element.phone}</td>
                 <td>{element.phone}</td>

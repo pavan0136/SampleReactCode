@@ -1,6 +1,6 @@
 import React from 'react';
-import 'assets/app.css';
-import Contacts from 'components/contacts';
+import './assets/app.css';
+import Contacts from './components/contacts'
 
 
 function App() {
