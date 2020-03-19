@@ -2,17 +2,24 @@
 .container{
     width: 90%;
     margin-left: 5%;
+    
 }
 
 .table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     border-collapse: collapse;
+    border:1px solid #e6e9f1;
+    max-height: 60vh;
+    overflow: scroll;
+    table-layout: fixed;
     width: 100%;
-    
+
   }
   
   .table td, .table th {
-    border: 1px solid #e6e9f1;
+    border-color: #e6e9f1;
+    border-style: solid;
+    border-width: 1px 0px 1px 0px ;
     padding: 8px;
     height: 46px;
     text-align: left;
@@ -30,9 +37,18 @@
     color:#72788d;
   }
 
+/* 
+  .contactCheckbox{
+      margin-right: 12px;
+      background-color: white !important;
+      border:1px solid #e6e9f1;
+  } */
 
 
-
+/* 
+  .name-container{
+    float: left;
+  } */
 
   .name-image-initials-container{
       height: 30px;
@@ -40,5 +56,21 @@
       background-color: #eae0fe;
       border-radius: 50%;
       float: left;
-       /*text-align: center; */
+      text-align: center;
+      margin-top:8px;
+      margin-right:10px;
+  }
+
+  .initials{
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .blue-color-text{
+      font-size: 15px;
+      color:#517fe9;
+      float: left;
   }

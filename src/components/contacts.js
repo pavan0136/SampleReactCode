@@ -3,65 +3,52 @@ import NumberFormat from 'react-number-format';
 import * as url from '../utils/url';
 import APIutil from '../utils/APIutils';
 import '../assets/contacts.css';
-import Name from './name'
+import Name from './name';
+import Deal from './deal';
+import Tag from './tag';
 
-
-export default class Contacts extends React.Component{
-    constructor(props){
+export default class Contacts extends React.Component {
+    constructor(props) {
         super(props);
-        this.state={
-            contacts:null
+        this.state = {
+            contacts: null
         }
-         this.calculateTotalValue = this.calculateTotalValue.bind(this);
-    }
-    componentDidMount(){
-       // console.log(url.getContacts);
-        APIutil.getDataAPI(url.getContacts).then(response => {
-            console.log(response.contacts);
-            if(response.hasOwnProperty('contacts')){
-                this.setState({contacts:response.contacts});
-            }
-           
-          }).catch(error => {
-              console.log("error thrown")
-              throw error;
-          });
+        this.calculateTotalValue = this.calculateTotalValue.bind(this);
     }
 
-    calculateTotalValue(data){
+    async componentDidMount() {
+        const response = await APIutil.getDataAPI(url.getContacts);
+        this.setState({ contacts: response.contacts });
+    }
+
+
+    calculateTotalValue(data) {
         var arrayOfNumbers = data.map(Number);
-       return <NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+        return <NumberFormat value={arrayOfNumbers.reduce((a, b) => a + b, 0)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
     }
 
-    getInitials(firstName,LastName){
-        return
-    }
-
-    render(){
+    render() {
 
         let content = null;
-        let {contacts}= this.state;
-if(contacts!==null){
-
-    content = contacts.map((element,index)=>{
-        return  <tr key={index}>
-                <td><input type="checkbox" id={index}/></td>
-                <td> <Name firstName={element.firstName} lastName={element.lastName} initials={this.getInitials(element.firstName,element.lastName)}/> </td>
-                <td>{this.calculateTotalValue(element.scoreValues)}</td>
-                <td>{element.phone}</td>
-                <td>{element.phone}</td>
-                <td>{element.phone}</td>
-        </tr>
-      });
-
-
-}
-        return(
+        let { contacts } = this.state;
+        if (contacts !== null && contacts !== undefined) {
+            content = contacts.map((element, index) => {
+                return <tr key={index}>
+                    <td><input type="checkbox" id={index} className="contactCheckbox" /></td>
+                    <td> <Name firstName={element.firstName} lastName={element.lastName} /> </td>
+                    <td>{this.calculateTotalValue(element.scoreValues)}</td>
+                    <td>{"Chicago"}</td>
+                    <td><Deal data={element} /></td>
+                    <td><Tag data={element} /></td>
+                </tr>
+            });
+        }
+        return (
             <div className="container">
                 <h2>Contacts</h2>
                 <table className="table">
-                <thead><tr><th><input type="checkbox"/></th><th>Contact Name</th><th>Total Value</th><th>Location</th><th>Deals</th><th>Tags</th></tr></thead>
-                  <tbody>{content}</tbody> 
+                    <thead><tr><th><input type="checkbox" className="contactCheckbox" /></th><th>Contact Name</th><th>Total Value</th><th>Location</th><th>Deals</th><th>Tags</th></tr></thead>
+                    <tbody>{content}</tbody>
                 </table>
             </div>
         )
