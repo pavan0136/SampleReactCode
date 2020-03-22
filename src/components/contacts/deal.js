@@ -1,12 +1,12 @@
 import React from 'react';
-import APIutil from '../utils/APIutils';
+import APIutil from '../../utils/APIutils';
 
 
-export default class Tag extends React.Component {
+export default class Deal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactTag: null
+            deal: null
         }
         this.getSubData = this.getSubData.bind(this);
     }
@@ -14,23 +14,21 @@ export default class Tag extends React.Component {
     async componentDidMount() {
         let { data} = this.props;
         if(data!==null){
-            this.getSubData(data, "contactTags");
+            this.getSubData(data, "deals");
         }
     }
 
 
-    getSubData(element, type) {
+     getSubData(element, type) {
         if (element.hasOwnProperty('links')) {
             if (element['links'].hasOwnProperty(type)) {
                 let str = element.links[type];
                 var url = str.split('https://lamppoststudios.api-us1.com/');
-
             APIutil.getDataAPI(url[1]).then((response)=>{
-                if(response.hasOwnProperty('contactTags')){
-                    var deals= response.contactTags.map((element)=>{
-                        return element.tag});
+                if(response.data.hasOwnProperty('deals')){
+                    var deals= response.data.deals.map(element=>element.title);
                       var daad = deals.join(',');
-                      this.setState({contactTag: daad});
+                      this.setState({deal: daad});
                  }
             });
             }
@@ -38,7 +36,6 @@ export default class Tag extends React.Component {
     }
 
     render() {
-
-        return  <p>{this.state.contactTag}</p>;
+        return  <p>{this.state.deal}</p>;
     }
 }

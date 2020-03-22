@@ -18,15 +18,10 @@ export default class APIutil {
             mode: 'no-cors',
             headers: header,
         }).then(response => {
-            return response.data;
+            return response;
         }).catch(error => {
             return error;
         });
     }
 
 }
-
-
-
-
-
